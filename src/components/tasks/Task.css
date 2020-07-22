@@ -1,0 +1,18 @@
+.task {
+  display: block;
+  padding: 15px 7px;
+  border: 1px solid #555;
+  margin: 8px 0;
+  width: 320px;
+  transition: ease-in-out 300ms all;
+}
+.task:hover {
+  box-shadow: 1px 1px 1px #333;
+}
+.task input,
+.task button {
+  cursor: pointer;
+}
+.task button {
+  float: right;
+}

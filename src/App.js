@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./App.css";
+import Tasks from "./components/tasks/Tasks";
+import tasks from "./samples/tasks.json";
+import TaskForm from "./components/tasks/TaskForm";
+class App extends React.Component {
+  state = {
+    tasks,
+  };
+  AddTask = (newTask) => {
+    this.setState({
+      tasks: [
+        ...this.state.tasks,
+        {
+          title: newTask.title,
+          description: newTask.description,
+          done: false,
+          id: this.state.tasks.length + 1,
+        },
+      ],
+    });
+  };
+  DeleteTask = (id) => {
+    this.setState({
+      tasks: this.state.tasks.filter((task) => task.id !== id),
+    });
+  };
+  render() {
+    return (
+      <div className="app">
+        <h1 className="appTitle">Tasks Manager</h1>
+        <TaskForm AddTask={this.AddTask} />
+        <Tasks DeleteTask={this.DeleteTask} tasks={this.state.tasks} />
+      </div>
+    );
+  }
 }
-
 export default App;
